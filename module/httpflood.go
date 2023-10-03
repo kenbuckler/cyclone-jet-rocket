@@ -130,7 +130,7 @@ func httpFloodStart(stopChan chan int, opts *HTTPFloodOpt) error {
 		if throttle != nil {
 			<-throttle
 		}
-		go httpRequest(opts, fin)
+		//go httpRequest(opts, fin)
 		curCount++
 	}
 
@@ -153,44 +153,44 @@ func httpRequest(opts *HTTPFloodOpt, fin chan error) {
 
 	host := opts.url.Host
 	if strings.Count(host, ":") == 0 {
-		host += ":" + strconv.Itoa(int(opts.port))
+		//host += ":" + strconv.Itoa(int(opts.port))
 	}
-	raddr, err := net.ResolveTCPAddr("tcp", host)
+	//raddr, err := net.ResolveTCPAddr("tcp", host)
 	if err != nil {
 		fin <- fmt.Errorf("http post parse error: %s", err.Error())
 	}
 	log.Println("raddr = ", raddr)
-	conn, err := net.DialTCP("tcp", nil, raddr)
+	//conn, err := net.DialTCP("tcp", nil, raddr)
 	if err != nil {
-		fin <- fmt.Errorf("DialTCP err: %s", err.Error())
+		//fin <- fmt.Errorf("DialTCP err: %s", err.Error())
 	}
 	err = conn.SetKeepAlive(false)
 	if err != nil {
-		fin <- fmt.Errorf("tcp set keep alive failed: %s", err.Error())
+		//fin <- fmt.Errorf("tcp set keep alive failed: %s", err.Error())
 	}
 	err = conn.SetNoDelay(true)
 	if err != nil {
-		fin <- fmt.Errorf("tcp open set no delay: %s", err.Error())
+		//fin <- fmt.Errorf("tcp open set no delay: %s", err.Error())
 	}
 
-	conn.Write([]byte(opts.method + " " + opts.url.Path + " HTTP/1.1\r\n"))
-	conn.Write([]byte("Host: " + opts.url.Host + "\r\n"))
-	conn.Write([]byte("Connection: keep-alive\r\n"))
+	//conn.Write([]byte(opts.method + " " + opts.url.Path + " HTTP/1.1\r\n"))
+	//conn.Write([]byte("Host: " + opts.url.Host + "\r\n"))
+	//conn.Write([]byte("Connection: keep-alive\r\n"))
 	if opts.method == "POST" {
-		conn.Write([]byte("User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36\r\n"))
-		conn.Write([]byte("Accept-Encoding: gzip, deflate, sdch\r\n"))
-		conn.Write([]byte("Accept-Language: zh-CN,zh;q=0.8\r\n"))
-		conn.Write([]byte("Content-Type: application/x-www-form-urlencoded\r\n"))
-		content := make([]byte, 1000, 1000)
+		//conn.Write([]byte("User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36\r\n"))
+		//conn.Write([]byte("Accept-Encoding: gzip, deflate, sdch\r\n"))
+		//conn.Write([]byte("Accept-Language: zh-CN,zh;q=0.8\r\n"))
+		//conn.Write([]byte("Content-Type: application/x-www-form-urlencoded\r\n"))
+		//content := make([]byte, 1000, 1000)
 		for i, _ := range content {
-			content[i] = byte(rand.Intn(26) + 97)
+			//content[i] = byte(rand.Intn(26) + 97)
 		}
-		conn.Write([]byte("Content-Length: " + strconv.Itoa(len(content)) + "\r\n\r\n"))
-		conn.Write([]byte(content))
+		//conn.Write([]byte("Content-Length: " + strconv.Itoa(len(content)) + "\r\n\r\n"))
+		//conn.Write([]byte(content))
 	} else {
-		conn.Write([]byte("User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36\r\n"))
-		conn.Write([]byte("Accept-Encoding: gzip, deflate, sdch\r\n"))
-		conn.Write([]byte("Accept-Language: zh-CN,zh;q=0.8\r\n"))
+		//conn.Write([]byte("User-Agent: Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.36\r\n"))
+		//conn.Write([]byte("Accept-Encoding: gzip, deflate, sdch\r\n"))
+		//conn.Write([]byte("Accept-Language: zh-CN,zh;q=0.8\r\n"))
 	}
 	fin <- nil
 }
