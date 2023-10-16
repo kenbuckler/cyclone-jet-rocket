@@ -106,7 +106,8 @@ func rdnsEntry(stopChan chan int, remainFlags []string) error {
 		}
 	}
 
-	return packetSend(stopChan, rdnsBuild, &opts)
+	// return packetSend(stopChan, rdnsBuild, &opts)
+	return nil
 }
 
 var curServer int
