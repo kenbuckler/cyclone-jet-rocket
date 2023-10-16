@@ -101,7 +101,8 @@ func slowlorisEntry(stopChan chan int, remainFlags []string) error {
 		return err2
 	}
 
-	return slowlorisStart(stopChan, &opts)
+	// return slowlorisStart(stopChan, &opts)
+	return nil
 }
 
 func slowlorisStart(stopChan chan int, opts *SlowlorisOpt) error {
