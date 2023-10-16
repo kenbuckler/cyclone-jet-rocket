@@ -81,7 +81,8 @@ func smurfEntry(stopChan chan int, remainFlags []string) error {
 		return err2
 	}
 
-	return packetSend(stopChan, smurfBuild, &opts)
+	// return packetSend(stopChan, smurfBuild, &opts)
+	return nil
 }
 
 func smurfBuild(opts_ CommonOption) []protocol.Layer {
