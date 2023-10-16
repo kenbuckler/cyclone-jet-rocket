@@ -113,7 +113,8 @@ func synFloodEntry(stopChan chan int, remainFlags []string) error {
 		return errors.New("no destination IP specified")
 	}
 
-	return packetSend(stopChan, synFloodBuild, &opts)
+	// return packetSend(stopChan, synFloodBuild, &opts)
+	return nil
 }
 
 func synFloodBuild(opts_ CommonOption) []protocol.Layer {
