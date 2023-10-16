@@ -69,7 +69,8 @@ func landEntry(stopChan chan int, remainFlags []string) error {
 		return errors.New("no destination IP specified")
 	}
 
-	return packetSend(stopChan, landBuild, &opts)
+	// return packetSend(stopChan, landBuild, &opts)
+	return nil
 }
 
 func landBuild(opts_ CommonOption) []protocol.Layer {
