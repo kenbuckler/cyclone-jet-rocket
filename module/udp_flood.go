@@ -124,11 +124,13 @@ func udpFloodEntry(stopChan chan int, remainFlags []string) error {
 		return errors.New("no destination IP specified")
 	}
 
-	return udpFloodStart(stopChan, &opts)
+	// return udpFloodStart(stopChan, &opts)
+	return nil
 }
 
 func udpFloodStart(stopChan chan int, opts *UDPFloodOpt) error {
-	return packetSend(stopChan, udpFloodBuild, opts)
+	// return packetSend(stopChan, udpFloodBuild, opts)
+	return nil
 }
 
 var curPort int = 0
